@@ -18,4 +18,20 @@ public class Book {
 
     String name;
     Long quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    Category category;
+
+    @Column(name = "promotion_value", columnDefinition = "double default 0.0")
+    Double promotionValue;
+
+    @Column(columnDefinition = "DECIMAL(15, 0) DEFAULT 0")
+    Double price;
+
+    @Column(name = "transaction_volume", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
+    Long transactionVolume;
+
+    @Column(columnDefinition = "varchar(500)", nullable = true)
+    String avatar;
 }

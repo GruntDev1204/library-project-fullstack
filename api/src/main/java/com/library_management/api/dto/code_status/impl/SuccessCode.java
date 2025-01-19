@@ -22,8 +22,12 @@ public enum SuccessCode implements CodeResponseInterface {
     // Success codes for DELETE operations
     DELETE_SUCCESS(20404, "Successfully deleted the DATA!", HttpStatus.OK),
 
-    ;
+    API_IS_VAILD(20000, "Api is running...", HttpStatus.OK),
 
+    Registration_is_done(20001, "Registration is done" ,  HttpStatus.CREATED),
+    Authentication_is_ok(20000, "Authentication is ok" ,  HttpStatus.OK),
+
+    ;
     Integer code;
     String message;
     HttpStatus status;

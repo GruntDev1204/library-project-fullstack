@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum ErrorCode implements CodeResponseInterface {
     // General error codes
-    GENERAL_GET_FAILED(50001, "FAILED TO RETRIEVE DATA!", HttpStatus.INTERNAL_SERVER_ERROR),
+    GENERAL_GET_FAILED(50001, "FAILED TO RETRIEVE DATA!", HttpStatus.NO_CONTENT),
     GENERAL_NOT_FOUND(40400, "DATA NOT FOUND!", HttpStatus.NOT_FOUND),
     DELETED_FAILED(40001, "FAILED TO DELETE DATA! ", HttpStatus.NO_CONTENT),
 
@@ -20,6 +20,9 @@ public enum ErrorCode implements CodeResponseInterface {
 
     // PUT/UPDATE method
     UPDATE_FAILED(42201, "FAILED TO UPDATE DATA! INVALID INPUT DATA!", HttpStatus.BAD_REQUEST),
+
+    Exist_Email(42202, "FAILED TO CONTINUE  THE PROCESS! Exist Email", HttpStatus.UNPROCESSABLE_ENTITY),
+    Exist_UserName(42203, "FAILED TO CONTINUE  THE PROCESS! Exist UserName", HttpStatus.UNPROCESSABLE_ENTITY),
 
     ;
 

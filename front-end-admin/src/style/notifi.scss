@@ -1,0 +1,48 @@
+.notifi {
+  @include setSize(auto, 100%);
+  @include setCenterColumn;
+  @include setMargin(true, 30px, 0, 0, 0);
+
+  .alert {
+    cursor: pointer;
+    position: fixed;
+    z-index: 9999;
+    top: 50px;
+    right: 50px;
+    text-wrap: wrap;
+    @include setSize(auto, 500px);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .content {
+      font-size: 17px;
+      font-weight: 500;
+    }
+  }
+  .alert-success {
+    background-color: rgb(135, 246, 0);
+  }
+  .alert-danger {
+    background-color: rgb(255, 59, 24);
+  }
+  .alert-warning {
+    background-color: rgb(246, 213, 0);
+  }
+  .alert-info {
+    background-color: rgb(0, 238, 246);
+  }
+}
+
+.alert-notice {
+  margin-top: 300px;
+  background-color: rgb(255, 174, 0);
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+  .warning:hover {
+    color: rgb(255, 59, 24);
+  }
+}

@@ -1,9 +1,7 @@
 package com.library_management.api.service;
 
-import java.util.List;
-
-public interface InterfaceService<M, R> {
-    List<M> getAll(R requestParam);
+public interface InterfaceService<M, R , Td , P> {
+   Td getAll(R requestParam , P options);
 
     M findById(Long id);
 
@@ -12,4 +10,5 @@ public interface InterfaceService<M, R> {
     Boolean delete(Long id);
 
     M update(Long id, M newData);
+
 }

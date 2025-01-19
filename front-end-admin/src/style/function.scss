@@ -1,0 +1,87 @@
+@mixin setSize($height : null, $width : null) {
+    @if $width !=null {
+        width: $width;
+    }
+
+    @if $height !=null {
+        height: $height;
+    }
+}
+
+@mixin setMaxSize($height : null, $width : null) {
+    @if $width !=null {
+        max-width: $width;
+    }
+
+    @if $height !=null {
+        max-height: $height;
+    }
+}
+
+@mixin setMargin($option : true, $top: null, $right: null, $bottom: null, $left: null) {
+    @if(option==true) {
+        @if $top !=null {
+            margin-top: $top ;
+        }
+
+        @if $right !=null {
+            margin-right: $right ;
+        }
+
+        @if $bottom !=null {
+            margin-bottom: $bottom ;
+        }
+
+        @if $left !=null {
+            margin-left: $left ;
+        }
+    }
+
+    @else {
+        padding: $top $right $bottom $left;
+    }
+
+}
+
+@mixin setPadding($option : true, $top: null, $right: null, $bottom: null, $left: null) {
+    @if(option==true) {
+        @if $top !=null {
+            padding-top: $top ;
+        }
+
+        @if $right !=null {
+            padding-right: $right ;
+        }
+
+        @if $bottom !=null {
+            padding-bottom: $bottom ;
+        }
+
+        @if $left !=null {
+            padding-left: $left ;
+        }
+    }
+
+    @else {
+        padding: $top $right $bottom $left;
+    }
+
+}
+
+@mixin circle {
+    @include setSize(100%, 100%);
+    border-radius: 50%;
+}
+
+@mixin setCenterRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin setCenterColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

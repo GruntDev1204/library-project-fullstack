@@ -1,0 +1,1 @@
+ALTER TABLE transactions ADD COLUMN is_purchased BIT Default 0 ;

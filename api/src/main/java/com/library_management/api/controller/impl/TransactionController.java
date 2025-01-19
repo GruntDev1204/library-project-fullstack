@@ -1,48 +1,48 @@
 package com.library_management.api.controller.impl;
 
+import com.library_management.api.attribute.attribute_class.FindTransaction;
+import com.library_management.api.attribute.pagination.PageOption;
 import com.library_management.api.controller.RestControllerInterface;
 import com.library_management.api.dto.code_status.impl.ErrorCode;
 import com.library_management.api.dto.code_status.impl.SuccessCode;
 import com.library_management.api.dto.exception.ApiException;
+import com.library_management.api.dto.req_and_res.transaction.TransactionReq;
+import com.library_management.api.dto.req_and_res.transaction.TransactionRes;
 import com.library_management.api.dto.response.ApiResponse;
 import com.library_management.api.dto.response.HandleResponseData;
-import com.library_management.api.model.Transaction;
-import com.library_management.api.service.InterfaceService;
+import com.library_management.api.mapper.extend.ITransactionMapper;
+import com.library_management.api.service.impl.TransactionSV.IAdditionalTransaction;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class TransactionController implements RestControllerInterface<Transaction, Object> {
-    InterfaceService<Transaction, Object> sv;
+public class TransactionController implements RestControllerInterface<TransactionReq, TransactionRes, FindTransaction, Page<TransactionRes>, PageOption> {
+    IAdditionalTransaction sv;
+    ITransactionMapper mapper;
     HandleResponseData res;
 
-    @Override
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Transaction>>> getAll(Object requestParam) {
-        return res.returnResponseJson(SuccessCode.GET_ALL_SUCCESS, sv.getAll(requestParam));
+    public ResponseEntity<ApiResponse<Page<TransactionRes>>> getAll(FindTransaction requestParam, PageOption p) {
+        return res.returnResponseJson(SuccessCode.GET_ALL_SUCCESS, sv.getAll(requestParam, p).map(mapper::entityToRes));
     }
 
-    @Override
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Transaction>> findById(@PathVariable Long id) {
-        return res.returnResponseJson(SuccessCode.GET_BY_ID_SUCCESS, sv.findById(id));
+    public ResponseEntity<ApiResponse<TransactionRes>> findById(@PathVariable Long id) {
+        return res.returnResponseJson(SuccessCode.GET_BY_ID_SUCCESS, mapper.entityToRes(sv.findById(id)));
     }
 
-    @Override
     @PostMapping
-    public ResponseEntity<ApiResponse<Transaction>> create(@RequestBody Transaction data) {
-        return res.returnResponseJson(SuccessCode.CREATE_SUCCESS, sv.create(data));
+    public ResponseEntity<ApiResponse<TransactionRes>> create(@RequestBody TransactionReq data) {
+        return res.returnResponseJson(SuccessCode.CREATE_SUCCESS, mapper.entityToRes(sv.create(mapper.reqToEntity(data))));
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         Boolean action = sv.delete(id);
@@ -52,9 +52,15 @@ public class TransactionController implements RestControllerInterface<Transactio
             return res.returnResponseJson(SuccessCode.DELETE_SUCCESS);
     }
 
-    @Override
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<Transaction>> update(@PathVariable Long id, @RequestBody Transaction newData) {
-        return res.returnResponseJson(SuccessCode.UPDATE_SUCCESS, sv.update(id, newData));
+    public ResponseEntity<ApiResponse<TransactionRes>> update(@PathVariable Long id, @RequestBody TransactionReq newData) {
+        return res.returnResponseJson(SuccessCode.UPDATE_SUCCESS, mapper.entityToRes(sv.update(id, mapper.reqToEntity(newData))));
+    }
+
+    @GetMapping("/update-is-purchase/{id}")
+    public ResponseEntity<ApiResponse<Void>> changeIsPurchase(@PathVariable Long id) {
+        Boolean action = sv.changeIsPurchase(id);
+        if (!action) throw new ApiException(ErrorCode.UPDATE_FAILED);
+        return res.returnResponseJson(SuccessCode.UPDATE_SUCCESS);
     }
 }

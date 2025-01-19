@@ -1,0 +1,92 @@
+.header {
+    background-color: rgb(22 29 49);
+    @include setSize(100px, 100%);
+    @include setPadding(false, 30px, 20px, null, null);
+    @include setCenterRow;
+
+    .logo {
+        @include setCenterRow;
+        @include setSize(auto, 20%);
+        .img{
+            @include setSize(60px, 60px);
+            cursor: pointer;
+        }
+        h3{
+            font-size: 60px;
+            color: #d71921;
+            cursor: pointer;
+            font-weight: 800;
+        }
+        gap: 20px;
+    }
+
+    img {
+        @include circle();
+    }
+
+    .menu {
+        @include setSize(null, 50%);
+        @include setCenterRow;
+        @include setMargin(false, null, 30px, null, null);
+        gap: 30px;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+           height: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;        
+        }
+
+        &::-webkit-scrollbar-thumb {        
+            background-color: #9a9f99;
+            border-radius: 20px;    
+        }
+
+        li {
+            a {
+                color: #9a9f99;
+            }
+
+            a:hover {
+                color: #ffffff;
+            }
+        }
+    }
+    .profile{
+        @include setCenterRow;
+        gap: 20px;
+        font-size: 20px;
+        @include setSize(null, 20%);
+        cursor: pointer;
+        .infomation{
+            @include setCenterColumn;
+            gap: 5px;
+        }
+        .avatar{
+            @include setSize(60px, 60px);
+        }
+    }
+}
+
+.infomation-modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    @include setSize(auto, 150px);
+    border: 1px solid #696969;
+    border-radius: 10px;
+    background-color: #1b1b1b;
+    position: absolute;
+    right: 90px;
+    top: 65px;
+    li{
+        padding: 10px;
+        border-radius: 5px;
+        &:hover{
+            background-color: #343434;
+        }
+    }
+}

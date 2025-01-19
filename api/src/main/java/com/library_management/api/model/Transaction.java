@@ -18,8 +18,8 @@ public class Transaction {
     Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    User user;
+    @JoinColumn(name = "customer_id", nullable = false)
+    Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
@@ -33,6 +33,15 @@ public class Transaction {
 
     @Column(name = "expired_date", nullable = false)
     LocalDateTime expiredDate;
+
+    @Column(name = "is_purchased", columnDefinition = "boolean default false")
+    Boolean isPurchased;
+
+    @Column(name = "sale_value", nullable = false, columnDefinition = "DOUBLE DEFAULT 0")
+    Double saleValue;
+
+    @Column(name = "single_price",  nullable = false , columnDefinition = "Decimal(15, 2) DEFAULT 0")
+    Double singlePrice;
 
     @Column(name = "status", nullable = false)
     String status;
