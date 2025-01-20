@@ -46,10 +46,8 @@ public class TransactionController implements RestControllerInterface<Transactio
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         Boolean action = sv.delete(id);
-        if (!action)
-            throw new ApiException(ErrorCode.DELETED_FAILED);
-        else
-            return res.returnResponseJson(SuccessCode.DELETE_SUCCESS);
+        if (!action) throw new ApiException(ErrorCode.DELETED_FAILED);
+        else return res.returnResponseJson(SuccessCode.DELETE_SUCCESS);
     }
 
     @PutMapping("/{id}")

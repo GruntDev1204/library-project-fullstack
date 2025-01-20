@@ -1,6 +1,7 @@
 package com.library_management.api.dto.req_and_res.customer;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,6 +16,7 @@ public class CustomerReq {
     String userName;
 
     @NotBlank(message = "password cannot be empty")
+    @Size(min = 10, message = "Password must be at least 10 characters long")
     String password;
 
     @NotBlank(message = "fullName cannot be empty")

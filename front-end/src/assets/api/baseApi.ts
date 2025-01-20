@@ -1,5 +1,6 @@
 import axios from "axios"
 import HandleError from "./handleError"
+import Cookies from "js-cookie"
 
 const baseRoute = "http://localhost:8080/"
 
@@ -11,15 +12,29 @@ const check = (error: any) => {
   return { status, message }
 }
 
-export default {
+const accessToken = Cookies.get("access-auth-token")
+  ? Cookies.get("access-auth-token")
+  : "$$$"
+
+const baseApi = {
   async check() {
     try {
       const res = await axios.get(baseRoute)
       return res.data.data
     } catch (error) {
-      console.error("Error while checking API:", error)
       return false
     }
+  },
+
+  getAccess(url: string, alert: any): any {
+    return axios
+      .get(baseRoute + url, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .catch((err) => {
+        const { status, message } = check(err)
+        HandleError(alert, status, null, message)
+      })
   },
 
   get(url: string, alert: any): any {
@@ -57,3 +72,5 @@ export default {
     })
   },
 }
+
+export default baseApi

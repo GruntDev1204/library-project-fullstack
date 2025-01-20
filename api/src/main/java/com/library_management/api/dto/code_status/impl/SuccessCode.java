@@ -24,9 +24,8 @@ public enum SuccessCode implements CodeResponseInterface {
 
     API_IS_VAILD(20000, "Api is running...", HttpStatus.OK),
 
-    Registration_is_done(20001, "Registration is done" ,  HttpStatus.CREATED),
-    Authentication_is_ok(20000, "Authentication is ok" ,  HttpStatus.OK),
-
+    Registration_is_done(20001, "Registration is done", HttpStatus.CREATED),
+    Authentication_is_ok(20000, "Authentication is ok", HttpStatus.OK),
     ;
     Integer code;
     String message;

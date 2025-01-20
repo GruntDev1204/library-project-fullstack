@@ -174,3 +174,11 @@
   @include setCenterColumn;
   font-weight: 800;
 }
+
+.go-on {
+  cursor: pointer;
+  &:hover {
+    color: #ffffff;
+    animation: rotateFan 1s ease-in-out infinite;
+  }
+}

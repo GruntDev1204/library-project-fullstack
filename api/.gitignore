@@ -7,6 +7,7 @@ build/
 *.yaml
 *.json
 *.gradle
+*.env
 
 config
 

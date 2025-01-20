@@ -4,7 +4,7 @@
   background-color: #333333;
   color: #ffffff;
   padding: 15px;
-  @include setFixedPosition(0px , null , null , null );
+  @include setFixedPosition(0px, null, null, null);
   .container {
     @include setCenterY;
   }

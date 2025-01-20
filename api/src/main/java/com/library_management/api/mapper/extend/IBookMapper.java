@@ -9,11 +9,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
-public interface IBookMapper extends IMapper<Book , BookReq , BookRes> {
-    @Mapping(source = "categoryId" , target = "category.id"  , nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+public interface IBookMapper extends IMapper<Book, BookReq, BookRes> {
+    @Mapping(source = "categoryId", target = "category.id", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     Book reqToEntity(BookReq req);
 
-    @Mapping(source = "category.name" , target = "categoryName")
-    @Mapping(source = "category.id" , target = "categoryId")
+    @Mapping(source = "category.name", target = "categoryName")
+    @Mapping(source = "category.id", target = "categoryId")
     BookRes entityToRes(Book e);
 }

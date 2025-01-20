@@ -6,7 +6,6 @@ import com.library_management.api.mapper.IMapper;
 import com.library_management.api.model.Category;
 import org.mapstruct.Mapper;
 
-
-@Mapper( componentModel = "spring" )
-public interface ICategoryMapper extends IMapper<Category , CategoryReq , CategoryRes> {
+@Mapper(componentModel = "spring")
+public interface ICategoryMapper extends IMapper<Category, CategoryReq, CategoryRes> {
 }

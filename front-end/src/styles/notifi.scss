@@ -25,16 +25,16 @@
   }
 
   .alert-success {
-    background-color: rgb(135, 246, 0);
+    background-color: rgba(70, 246, 0, 0.515);
   }
   .alert-danger {
-    background-color: rgb(252, 38, 0);
+    background-color: rgba(252, 0, 0, 0.838);
   }
   .alert-warning {
-    background-color: rgb(246, 213, 0);
+    background-color: rgba(246, 205, 0, 0.711);
   }
   .alert-info {
-    background-color: rgb(0, 238, 246);
+    background-color: rgba(0, 245, 253, 0.6);
   }
 }
 
@@ -86,9 +86,9 @@
   }
 }
 
-.tag-3{
+.tag-3 {
   font-weight: 700;
 }
-.remove{
+.remove {
   text-decoration: line-through;
 }

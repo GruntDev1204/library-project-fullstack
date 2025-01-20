@@ -1,4 +1,5 @@
 @import url("https://fonts.google.com/specimen/Poppins");
+
 .notifi {
   width: 100%;
   height: auto;
@@ -8,6 +9,7 @@
   flex-direction: column;
   padding: 30px 0 0 0;
 }
+
 .notifi .alert {
   cursor: pointer;
   position: fixed;
@@ -21,23 +23,29 @@
   color: rgb(0, 0, 0);
   border: 1px solid rgb(0, 0, 0);
 }
+
 .notifi .alert .title {
   font-size: 25px;
   font-weight: 700;
 }
+
 .notifi .alert .content {
   font-size: 17px;
   font-weight: 500;
 }
+
 .notifi .alert-success {
   background-color: rgb(135, 246, 0);
 }
+
 .notifi .alert-danger {
   background-color: rgb(252, 38, 0);
 }
+
 .notifi .alert-warning {
   background-color: rgb(246, 213, 0);
 }
+
 .notifi .alert-info {
   background-color: rgb(0, 238, 246);
 }
@@ -49,6 +57,7 @@
   font-weight: 700;
   cursor: pointer;
 }
+
 .alert-notice .warning:hover {
   color: rgb(24, 255, 232);
 }
@@ -62,6 +71,7 @@
   flex-direction: column;
   background-color: #35393b;
 }
+
 .loading .logo {
   width: 400px;
   height: 400px;
@@ -80,6 +90,7 @@
   border-radius: 5px;
   background: #f44848;
 }
+
 .tag:hover {
   animation: zoomEffect 0.5s ease-in-out forwards;
 }
@@ -91,6 +102,7 @@
   width: fit-content;
   font-weight: 800;
 }
+
 .tag-2:hover {
   animation: zoomEffect 0.5s ease-in-out forwards;
 }
@@ -108,88 +120,109 @@
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(5);
     opacity: 0.6;
   }
+
   100% {
     transform: scale(0);
     opacity: 0;
   }
 }
+
 @keyframes zoomEffect {
   0% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(1.2);
   }
 }
+
 @keyframes flyUpEffect {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-300vh);
   }
 }
+
 @keyframes floatEffect {
   0% {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
+
   30% {
     transform: translateY(-150px) scale(1.2);
     opacity: 0.8;
   }
+
   60% {
     transform: translateY(-300px) scale(1.5);
     opacity: 0.5;
   }
+
   100% {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
+
 @keyframes floatInCircle {
   0% {
     transform: translate(-300px, 300px) rotate(0deg);
     opacity: 1;
   }
+
   25% {
     transform: translate(300px, -300px) rotate(90deg);
     opacity: 0.8;
   }
+
   50% {
     transform: translate(300px, 0) rotate(180deg);
     opacity: 0.6;
   }
+
   75% {
     transform: translate(300px, -300px) rotate(270deg);
     opacity: 0.8;
   }
+
   100% {
     transform: translate(0, 0) rotate(360deg);
     opacity: 1;
   }
 }
+
 @keyframes rotateFan {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(90deg);
   }
+
   50% {
     transform: rotate(180deg);
   }
+
   75% {
     transform: rotate(270deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 .effect-fan {
   animation: rotateFan 0.1s ease-in-out infinite;
 }
@@ -202,24 +235,30 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-200px);
   }
+
   100% {
     transform: translateY(0);
   }
 }
+
 @keyframes rotateFanMove {
   0% {
     transform: translateX(-50vw) rotate(0deg);
   }
+
   50% {
     transform: translateX(0) rotate(180deg);
   }
+
   100% {
     transform: translateX(100VW) rotate(360deg);
   }
 }
+
 .effect-bunny {
   animation: flySlowUpEffect 0.1s ease-in-out infinite;
 }
@@ -237,11 +276,13 @@
     transform: translate(0px, -100%);
     opacity: 0;
   }
+
   100% {
     transform: translate(0px, 0);
     opacity: 1;
   }
 }
+
 .header {
   width: 100%;
   height: auto;
@@ -254,24 +295,29 @@
   z-index: 9999;
   top: 0px;
 }
+
 .header .container {
   display: flex;
   align-items: center;
 }
+
 .header .header-left,
 .header .header-right {
   cursor: pointer;
 }
+
 .header .header-left {
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
 }
+
 .header .header-left i:hover {
   color: rgb(0, 255, 229);
   animation: rotateFan 0.5s ease-in-out infinite;
 }
+
 .header .header-right {
   width: 50%;
   height: 100%;
@@ -287,15 +333,18 @@
   margin-top: 100px;
   margin-bottom: 50px;
 }
+
 .body .slide-container {
   width: 100%;
   height: auto;
   overflow: hidden;
 }
+
 .body .slide-container .slider {
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
+
 .body .slide-container .slide {
   min-width: 100%;
   display: flex;
@@ -303,12 +352,14 @@
   align-items: center;
   flex-direction: column;
 }
+
 .body .slide-container video {
   width: 100%;
   height: 600px;
   background-color: #242628;
   border-radius: 20px;
 }
+
 .body .alert-form {
   background-color: #35383b;
   color: #ffffff;
@@ -320,10 +371,12 @@
   width: 100%;
   height: auto;
 }
+
 .body .alert-form .row {
   width: 100%;
   height: 100%;
 }
+
 .body .alert-card {
   background-color: #242628;
   color: #ffffff;
@@ -335,6 +388,7 @@
   width: 100%;
   height: auto;
 }
+
 .body .alert-card .row {
   width: 100%;
   height: 100%;
@@ -353,27 +407,32 @@
   color: #000000;
   font-weight: 700;
 }
+
 .card-content .header-card {
   width: 100%;
   height: auto;
   margin-bottom: 20px;
 }
+
 .card-content .body-card {
   width: 100%;
   height: auto;
   margin-bottom: 20px;
 }
+
 .card-content .footer-card {
   position: absolute;
   bottom: 10px;
   width: 200px;
 }
+
 .card-content img {
   width: 100%;
   height: 350px;
   object-fit: cover;
   border-radius: 10px;
 }
+
 .card-content:hover {
   transition: all 0.5s ease-in-out;
   background: linear-gradient(to left bottom, #fc6c8f, #ff9a8b, #d76d97, #f18dab);
@@ -386,27 +445,32 @@
   color: #000000;
   font-weight: 700;
 }
+
 .card-content-2 .header-card {
   width: 100%;
   height: auto;
   margin-bottom: 20px;
 }
+
 .card-content-2 .body-card {
   width: 100%;
   height: auto;
   margin-bottom: 20px;
 }
+
 .card-content-2 .footer-card {
   position: absolute;
   bottom: 10px;
   width: fit-content;
 }
+
 .card-content-2 img {
   width: 100%;
   height: 300px;
   object-fit: cover;
   border-radius: 10px;
 }
+
 .card-content-2:hover {
   transition: all 0.5s ease-in-out;
   background: linear-gradient(to left bottom, #fc6c8f, #ff9a8b, #d76d97, #f18dab);
@@ -431,12 +495,14 @@
   animation: slideDown 0.5s ease-out forwards;
   cursor: pointer;
 }
+
 .modal-view img {
   width: 100%;
   height: 250px;
   object-fit: contain;
   margin-bottom: 30px;
 }
+
 .modal-view button {
   border-radius: 50% !important;
   width: 50px;
@@ -447,6 +513,7 @@
   flex-direction: column;
   font-size: 25px !important;
 }
+
 .modal-view button i {
   padding: 5px !important;
 }
@@ -476,6 +543,15 @@
   font-weight: 800;
 }
 
+.go-on {
+  cursor: pointer;
+}
+
+.go-on:hover {
+  color: #ffffff;
+  animation: rotateFan 1s ease-in-out infinite;
+}
+
 .footer {
   width: 100%;
   height: auto;
@@ -485,30 +561,36 @@
   color: #ffffff;
   padding: 20px;
 }
+
 .footer .container {
   display: flex;
   align-items: center;
 }
+
 .footer .footer-left,
 .footer .footer-right {
   cursor: pointer;
 }
+
 .footer .footer-left {
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
 }
+
 .footer .footer-left i:hover {
   color: rgb(0, 255, 229);
   animation: rotateFan 0.5s ease-in-out infinite;
 }
+
 .footer .footer-left .avatar-admin {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   object-fit: cover;
 }
+
 .footer .footer-right {
   width: 50%;
   height: 100%;
@@ -526,13 +608,16 @@
   align-items: flex-start !important;
   gap: 15px;
 }
+
 .row-col small:nth-child(1) {
   color: rgb(105, 109, 109);
   font-size: 20px;
 }
+
 .row-col small:nth-child(1):hover {
   color: rgb(0, 255, 229);
 }
+
 .row-col small:nth-child(2) {
   color: rgb(213, 255, 255);
   font-size: 15px;
@@ -680,6 +765,7 @@ table {
 a {
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: none;
 }
@@ -708,10 +794,12 @@ a:hover {
   color: #ffffff;
   border: 1px solid;
 }
+
 .button:hover {
   background-color: #ffffff;
   color: #000000 !important;
 }
+
 .button i:hover {
   color: #000000 !important;
 }
@@ -720,6 +808,7 @@ a {
   all: unset;
   cursor: pointer;
 }
+
 a:hover {
   all: unset;
 }
@@ -737,6 +826,7 @@ a:hover {
   bottom: 100px;
   border: none !important;
 }
+
 .option-button:hover {
   background-color: #aaa7aa !important;
   color: #000000 !important;

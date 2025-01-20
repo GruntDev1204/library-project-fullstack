@@ -1,71 +1,77 @@
-@mixin setSize($height : null, $width : null) {
+@mixin setSize($height: null, $width: null) {
   @if $width !=null {
-      width: $width;
+    width: $width;
   }
 
   @if $height !=null {
-      height: $height;
+    height: $height;
   }
 }
 
-@mixin setMaxSize($height : null, $width : null) {
+@mixin setMaxSize($height: null, $width: null) {
   @if $width !=null {
-      max-width: $width;
+    max-width: $width;
   }
 
   @if $height !=null {
-      max-height: $height;
+    max-height: $height;
   }
 }
 
-@mixin setMargin($option : true, $top: null, $right: null, $bottom: null, $left: null) {
-  @if(option==true) {
-      @if $top !=null {
-          margin-top: $top ;
-      }
+@mixin setMargin(
+  $option: true,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  @if (option==true) {
+    @if $top !=null {
+      margin-top: $top;
+    }
 
-      @if $right !=null {
-          margin-right: $right ;
-      }
+    @if $right !=null {
+      margin-right: $right;
+    }
 
-      @if $bottom !=null {
-          margin-bottom: $bottom ;
-      }
+    @if $bottom !=null {
+      margin-bottom: $bottom;
+    }
 
-      @if $left !=null {
-          margin-left: $left ;
-      }
-  }
-
-  @else {
-      padding: $top $right $bottom $left;
+    @if $left !=null {
+      margin-left: $left;
+    }
+  } @else {
+    padding: $top $right $bottom $left;
   }
 }
 
+@mixin setPadding(
+  $option: true,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  @if (option==true) {
+    @if $top !=null {
+      padding-top: $top;
+    }
 
-@mixin setPadding($option : true, $top: null, $right: null, $bottom: null, $left: null) {
-  @if(option==true) {
-      @if $top !=null {
-          padding-top: $top ;
-      }
+    @if $right !=null {
+      padding-right: $right;
+    }
 
-      @if $right !=null {
-          padding-right: $right ;
-      }
+    @if $bottom !=null {
+      padding-bottom: $bottom;
+    }
 
-      @if $bottom !=null {
-          padding-bottom: $bottom ;
-      }
-
-      @if $left !=null {
-          padding-left: $left ;
-      }
+    @if $left !=null {
+      padding-left: $left;
+    }
+  } @else {
+    padding: $top $right $bottom $left;
   }
-
-  @else {
-      padding: $top $right $bottom $left;
-  }
-
 }
 
 @mixin circle {

@@ -119,7 +119,7 @@
     transform: translateX(0) rotate(180deg);
   }
   100% {
-    transform: translateX(100VW) rotate(360deg);
+    transform: translateX(100vw) rotate(360deg);
   }
 }
 
@@ -137,12 +137,11 @@
 
 @keyframes slideDown {
   0% {
-    transform: translate(0px, -100%); 
+    transform: translate(0px, -100%);
     opacity: 0;
   }
   100% {
-    transform: translate(0px, 0); 
+    transform: translate(0px, 0);
     opacity: 1;
   }
 }
-

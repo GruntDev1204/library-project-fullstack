@@ -29,7 +29,7 @@ public class CategoryService implements InterfaceService<Category, Object, List<
 
     @Override
     public Category create(Category data) {
-            return rp.save(data);
+        return rp.save(data);
     }
 
     @Override

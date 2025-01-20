@@ -22,7 +22,10 @@ export default function HandleError(
     Object.entries(detailError).forEach(([field, message]) => {
       notificationRef.showAlert("danger", `${field}: ${message}`)
     })
-  } else {
+  } 
+  else if (codeError === 401){
+    notificationRef.showAlert("danger", "authentication is failed")
+  }else {
     notificationRef.showAlert("danger", message + " | Code error: " + codeError)
   }
 }

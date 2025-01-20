@@ -25,15 +25,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/books")
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class BookController implements RestControllerInterface<BookReq, BookRes ,  FindBook , Page<BookRes> , PageOption> {
+public class BookController implements RestControllerInterface<BookReq, BookRes, FindBook, Page<BookRes>, PageOption> {
     HandleResponseData res;
-    InterfaceService<Book, FindBook , Page<Book> , PageOption> sv;
+    InterfaceService<Book, FindBook, Page<Book>, PageOption> sv;
     IBookMapper mapper;
 
     @Override
     @GetMapping
-    public ResponseEntity<ApiResponse<Page<BookRes>>> getAll(FindBook requestParam , PageOption p) {
-        return res.returnResponseJson(SuccessCode.GET_ALL_SUCCESS, sv.getAll(requestParam , p).map(mapper::entityToRes));
+    public ResponseEntity<ApiResponse<Page<BookRes>>> getAll(FindBook requestParam, PageOption p) {
+        return res.returnResponseJson(SuccessCode.GET_ALL_SUCCESS, sv.getAll(requestParam, p).map(mapper::entityToRes));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class BookController implements RestControllerInterface<BookReq, BookRes 
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<BookRes>> update(@PathVariable Long id, @Validated @RequestBody  BookReq newData) {
+    public ResponseEntity<ApiResponse<BookRes>> update(@PathVariable Long id, @Validated @RequestBody BookReq newData) {
         return res.returnResponseJson(SuccessCode.UPDATE_SUCCESS, mapper.entityToRes(sv.update(id, mapper.reqToEntity(newData))));
     }
 }

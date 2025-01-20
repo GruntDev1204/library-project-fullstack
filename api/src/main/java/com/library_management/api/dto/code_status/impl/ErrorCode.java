@@ -24,7 +24,10 @@ public enum ErrorCode implements CodeResponseInterface {
     Exist_Email(42202, "FAILED TO CONTINUE  THE PROCESS! Exist Email", HttpStatus.UNPROCESSABLE_ENTITY),
     Exist_UserName(42203, "FAILED TO CONTINUE  THE PROCESS! Exist UserName", HttpStatus.UNPROCESSABLE_ENTITY),
 
-    ;
+    Token_Creation_Failed(42204, "failed to create a token", HttpStatus.UNPROCESSABLE_ENTITY),
+    User_Not_Found(42206, "USER NOT FOUND", HttpStatus.UNPROCESSABLE_ENTITY),
+    Wrong_Password(42207, "PASSWORD IS NOT CORRECT", HttpStatus.UNPROCESSABLE_ENTITY),
+    Authentication_is_not_ok(40001, "Authentication is not ok ,token is not valid, cook đi cook đi!", HttpStatus.UNAUTHORIZED);
 
     Integer code;
     String message;

@@ -8,7 +8,7 @@ public interface RestControllerInterface<Req, Res, R, Td, P> {
 
     ResponseEntity<ApiResponse<Res>> findById(Long id);
 
-    ResponseEntity<ApiResponse<Res>> create( Req data);
+    ResponseEntity<ApiResponse<Res>> create(Req data);
 
     ResponseEntity<ApiResponse<Void>> delete(Long id);
 
