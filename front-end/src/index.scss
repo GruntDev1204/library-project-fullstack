@@ -1,0 +1,213 @@
+@import "./styles/function.scss";
+@import "./styles/notifi.scss";
+@import "./styles/amination.scss";
+@import "./styles/header.scss";
+@import "./styles/body.scss";
+@import "./styles/footer.scss";
+@import url("https://fonts.google.com/specimen/Poppins");
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  background: #f07886;
+  color: #242628;
+  line-height: 1;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.container {
+  @include setMargin(0, auto, null, null);
+  @include setMaxSize(null, 1080px);
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.large {
+  font-size: 50px;
+}
+
+.medium {
+  font-size: 30px;
+}
+
+.small {
+  font-size: 20px;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  @include setPadding(false, 7px, null, null, null);
+  border-radius: 5px;
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid;
+  &:hover {
+    background-color: #ffffff;
+    color: #000000 !important;
+  }
+  i:hover {
+    color: #000000 !important;
+  }
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+  &:hover {
+    all: unset;
+  }
+}
+.link {
+  &:hover {
+    color: aqua !important;
+  }
+}
+
+.option-button {
+  @include setPadding(false, 10px, null, null, null);
+  border-radius: 50%;
+  @include setFixedPosition(null, 100px, 100px, null);
+  border: none !important;
+  &:hover {
+    background-color: #aaa7aa !important;
+    color: #000000 !important;
+  }
+}
+
+.flex-center {
+  @include setCenterRow;
+  gap: 10px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

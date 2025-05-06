@@ -1,0 +1,1 @@
+ALTER  TABLE books ADD COLUMN avatar Varchar(500) Default NULL;

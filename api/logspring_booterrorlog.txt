@@ -1,0 +1,2 @@
+03:31 07/05/2025 - details: java.util.NoSuchElementException
+03:32 07/05/2025 - details: java.util.NoSuchElementException

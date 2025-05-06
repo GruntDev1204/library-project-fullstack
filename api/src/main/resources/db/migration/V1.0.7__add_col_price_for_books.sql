@@ -1,0 +1,1 @@
+ALTER TABLE books ADD COLUMN price Decimal(15 , 0) Default 0  ;

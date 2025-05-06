@@ -1,0 +1,257 @@
+.large {
+  font-size: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  i:hover {
+    color: rgb(0, 247, 255);
+  }
+}
+
+.medium {
+  font-size: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  i:hover {
+    color: rgb(0, 247, 255);
+  }
+}
+
+.small {
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  i:hover {
+    color: rgb(0, 247, 255);
+  }
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    color: rgb(245, 249, 146);
+  }
+}
+
+.slide-container {
+  @include setSize(100%, 100%);
+  overflow: hidden;
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100%;
+    @include setCenterColumn();
+  }
+
+  video {
+    @include setSize(600px, 100%);
+    background-color: #292727fd;
+    border-radius: 20px;
+  }
+}
+.alert-form-2 {
+  background-color: #292727fd;
+  margin-top: 50px;
+  @include setCenterColumn;
+  @include setSize(100%, 100%);
+  .row{
+      @include setSize(100%, 100%);
+  }
+}
+
+table,
+.table {
+  text-align: center;
+
+  th,
+  td {
+    vertical-align: middle;
+    border: 1px solid #454d55;
+    padding: 10px;
+  }
+  thead {
+    background-color: #181a1b;
+    padding: 10px;
+    tr {
+      padding: 10px;
+    }
+  }
+}
+
+.avatar-circle {
+  @include setSize(100px, 150px);
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.modal {
+  @include setSize(auto, 100%);
+  @include setCenterColumn;
+  padding-bottom: 50px;
+
+  .modal-content {
+    @include setSize(auto, 700px);
+    border-radius: 20px;
+    background-color: #343a40;
+    color: white;
+    cursor: pointer;
+    .modal-header,
+    .modal-footer,
+    .modal-body {
+      border-bottom: none;
+      border-top: none;
+    }
+    .modal-header {
+      font-size: 25px;
+      font-weight: 700;
+      @include setCenterRow;
+    }
+
+    input {
+      font-size: 15px;
+      border-radius: 10px;
+    }
+  }
+}
+
+.form-large {
+  @include setSize(auto, auto);
+  @include setCenterColumn;
+
+  .modal-content {
+    label {
+      text-align: center;
+    }
+    border: none;
+  }
+}
+
+.alert-preview {
+  @include setCenterRow;
+  .preview {
+    @include setMaxSize(300px, 100%);
+  }
+}
+
+.alert-black {
+  background-color: rgba(0, 0, 0, 0.378);
+}
+
+.alert-form {
+  background-color: rgba(38, 40, 42, 0.585);
+  border-radius: 20px;
+}
+
+.alert-tabbar {
+  cursor: pointer;
+  background-color: rgba(31, 31, 31, 0.761);
+  gap: 20px;
+  display: flex;
+  @include setSize(auto, 100%);
+  .left-tabbar,.right-tabbar , .center-tabbar {
+    select{
+      cursor: pointer;
+      }
+  }
+  .small-input {
+    @include setSize(100%, 150px);
+    border-radius: 5px;
+    font-size: 20px;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  .left-tabbar {
+    @include setCenterRow;
+    @include setSize(auto, 25%);
+    gap: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .center-tabbar {
+    @include setCenterRow;
+    @include setSize(auto, 25%);
+    gap: 10px;
+    cursor: pointer;
+  }
+  .right-tabbar {
+    @include setCenterRow;
+    @include setSize(auto, 25%);
+    gap: 10px;
+    cursor: pointer;
+  }
+}
+
+.alert-tabbar-2 {
+  background-color: rgba(31, 31, 31, 0.761);
+  gap: 20px;
+  display: flex;
+  @include setSize(auto, 100%);
+
+  .left-tabbar,.right-tabbar , .center-tabbar {
+    select{
+      cursor: pointer;
+      }
+  }
+
+  .small-input {
+    @include setSize(auto, 100px);
+    border-radius: 10px;
+    font-size: 20px;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  .left-tabbar {
+    @include setCenterRow;
+    gap: 10px;
+    padding: 10px;
+    @include setSize(auto, 33%);
+  }
+  .center-tabbar {
+    @include setCenterRow;
+    @include setSize(auto, 33%);
+    gap: 10px;
+    cursor: pointer;
+  }
+  .right-tabbar {
+    @include setCenterRow;
+    @include setSize(auto, 33%);
+    gap: 10px;
+    cursor: pointer;
+  }
+}
+
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  .action-upload {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.flex {
+  font-size: 30px;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.item-right {
+  padding-right: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
