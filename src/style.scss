@@ -1,0 +1,183 @@
+@import "./style/function.scss";
+@import "./style/header.scss";
+@import "./style/body.scss";
+@import "./style/notifi.scss";
+@import "./style/amination.scss";
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  background-color: #0e1833;
+  color: white;
+  line-height: 1;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.container {
+  @include setMargin(0, auto, null, null);
+  @include setMaxSize(null, 1080px);
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+  &:hover {
+    all: unset;
+    cursor: pointer;
+  }
+}
+
+.button {
+  @include setPadding(false, 7px, null, null, null);
+  border-radius: 5px;
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid;
+  a {
+    all: unset;
+  }
+  &:hover {
+    background-color: #e1dcc5;
+    color: #333333;
+  }
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+tr,
+th {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 150px !important;
+  line-height: 25px !important;
+}
+
+
+.line-vote{
+	i:hover{
+		color: #00eaff;
+	}
+}
