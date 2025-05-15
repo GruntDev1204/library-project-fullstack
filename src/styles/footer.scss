@@ -1,0 +1,51 @@
+.footer {
+  @include setSize(auto, 100%);
+  @include setCenterY;
+  background-color: #333333;
+  color: #ffffff;
+  padding: 20px;
+  .container {
+    @include setCenterY;
+  }
+  .footer-left,
+  .footer-right {
+    cursor: pointer;
+  }
+
+  .footer-left {
+    i:hover {
+      color: rgb(0, 255, 229);
+      animation: rotateFan 0.5s ease-in-out infinite;
+    }
+    .avatar-admin {
+      @include setSize(70px, 70px);
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    @include setSize(100%, 50%);
+    @include setCenterY;
+  }
+  .footer-right {
+    @include setSize(100%, 50%);
+    @include setCenterY;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}
+
+.row-col {
+  @include setCenterColumn;
+  align-items: flex-start !important;
+  gap: 15px;
+  small:nth-child(1) {
+    color: rgb(105, 109, 109);
+    font-size: 20px;
+    &:hover {
+      color: rgb(0, 255, 229);
+    }
+  }
+  small:nth-child(2) {
+    color: rgb(213, 255, 255);
+    font-size: 15px;
+  }
+}

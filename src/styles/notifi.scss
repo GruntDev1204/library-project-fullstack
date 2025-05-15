@@ -1,0 +1,94 @@
+.notifi {
+  @include setSize(auto, 100%);
+  @include setCenterColumn;
+  @include setMargin(true, 30px, 0, 0, 0);
+
+  .alert {
+    cursor: pointer;
+    position: fixed;
+    z-index: 9999;
+    top: 50px;
+    right: 50px;
+    text-wrap: wrap;
+    @include setSize(auto, 500px);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .content {
+      font-size: 17px;
+      font-weight: 500;
+    }
+  }
+
+  .alert-success {
+    background-color: rgba(70, 246, 0, 0.515);
+  }
+  .alert-danger {
+    background-color: rgba(252, 0, 0, 0.838);
+  }
+  .alert-warning {
+    background-color: rgba(246, 205, 0, 0.711);
+  }
+  .alert-info {
+    background-color: rgba(0, 245, 253, 0.6);
+  }
+}
+
+.alert-notice {
+  margin-top: 300px;
+  background-color: rgb(255 28 0);
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+  .warning:hover {
+    color: rgb(24, 255, 232);
+  }
+}
+
+.loading {
+  @include setSize(100vh, 100%);
+  @include setCenterColumn;
+  background-color: #35393b;
+  .logo {
+    @include setSize(400px, 400px);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    animation: rotateFanMove 3s ease-out infinite;
+  }
+}
+
+.tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  border-radius: 5px;
+  background: #f44848;
+  &:hover {
+    animation: zoomEffect 0.5s ease-in-out forwards;
+  }
+}
+
+.tag-2 {
+  padding: 10px;
+  border-radius: 5px;
+  background: #f44848;
+  width: fit-content;
+  font-weight: 800;
+  &:hover {
+    animation: zoomEffect 0.5s ease-in-out forwards;
+  }
+}
+
+.tag-3 {
+  font-weight: 700;
+}
+.remove {
+  text-decoration: line-through;
+}

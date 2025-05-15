@@ -1,0 +1,184 @@
+.body {
+  @include setSize(100%, 100%);
+  margin-top: 100px;
+  margin-bottom: 50px;
+
+  .slide-container {
+    @include setSize(auto, 100%);
+    overflow: hidden;
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      @include setCenterColumn();
+    }
+
+    video {
+      @include setSize(600px, 100%);
+      background-color: #242628;
+      border-radius: 20px;
+    }
+  }
+  .alert-form {
+    background-color: #35383b;
+    color: #ffffff;
+    margin-top: 50px;
+    @include setCenterColumn;
+    @include setSize(auto, 100%);
+    .row {
+      @include setSize(100%, 100%);
+    }
+  }
+  .alert-card {
+    background-color: #242628;
+    color: #ffffff;
+    cursor: pointer;
+    @include setCenterColumn;
+    @include setSize(auto, 100%);
+    .row {
+      @include setSize(100%, 100%);
+    }
+  }
+}
+
+.form-login {
+  background-color: #323231 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.card-content {
+  @include setPadding(15px);
+  @include setSize(600px, 100%);
+  background: linear-gradient(to right top, #fc6c8f, #ff9a8b, #d76d97, #f18dab);
+  color: #000000;
+  font-weight: 700;
+  .header-card {
+    @include setSize(auto, 100%);
+    margin-bottom: 20px;
+  }
+
+  .body-card {
+    @include setSize(auto, 100%);
+    margin-bottom: 20px;
+  }
+
+  .footer-card {
+    position: absolute;
+    bottom: 10px;
+    width: 200px;
+  }
+
+  img {
+    @include setSize(350px, 100%);
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  &:hover {
+    transition: all 0.5s ease-in-out;
+    background: linear-gradient(
+      to left bottom,
+      #fc6c8f,
+      #ff9a8b,
+      #d76d97,
+      #f18dab
+    );
+  }
+}
+
+.card-content-2 {
+  @include setPadding(15px);
+  @include setSize(auto, 100%);
+  background: linear-gradient(to right top, #fc6c8f, #ff9a8b, #d76d97, #f18dab);
+  color: #000000;
+  font-weight: 700;
+  .header-card {
+    @include setSize(auto, 100%);
+    margin-bottom: 20px;
+  }
+
+  .body-card {
+    @include setSize(auto, 100%);
+    margin-bottom: 20px;
+  }
+  .footer-card {
+    position: absolute;
+    bottom: 10px;
+    width: fit-content;
+  }
+
+  img {
+    @include setSize(300px, 100%);
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  &:hover {
+    transition: all 0.5s ease-in-out;
+    background: linear-gradient(
+      to left bottom,
+      #fc6c8f,
+      #ff9a8b,
+      #d76d97,
+      #f18dab
+    );
+  }
+}
+
+.flex-col-center {
+  @include setCenterColumn;
+  justify-content: flex-start;
+}
+
+.modal-view {
+  @include setFixedPosition(0, null, null, 0);
+  @include setSize(100vh, 100%);
+  background: rgba(0, 0, 0, 0.353);
+  animation: slideDown 0.5s ease-out forwards;
+  cursor: pointer;
+  img {
+    @include setSize(250px, 100%);
+    object-fit: contain;
+    margin-bottom: 30px;
+  }
+  button {
+    border-radius: 50% !important;
+    @include setSize(50px, 50px);
+    @include setCenterColumn;
+    font-size: 25px !important;
+    i {
+      padding: 5px !important;
+    }
+  }
+}
+
+.book-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block;
+  line-height: 25px;
+  font-size: 20px;
+}
+
+.notice {
+  @include setSize(95%, 100%);
+  position: absolute !important;
+  z-index: 999;
+  bottom: 0;
+  background-color: #0100009f;
+  color: #f6f6f6;
+  @include setCenterColumn;
+  font-weight: 800;
+}
+
+.go-on {
+  cursor: pointer;
+  &:hover {
+    color: #ffffff;
+    animation: rotateFan 1s ease-in-out infinite;
+  }
+}

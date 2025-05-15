@@ -1,0 +1,30 @@
+.header {
+  @include setSize(auto, 100%);
+  @include setCenterY;
+  background-color: #333333;
+  color: #ffffff;
+  padding: 15px;
+  @include setFixedPosition(0px, null, null, null);
+  .container {
+    @include setCenterY;
+  }
+  .header-left,
+  .header-right {
+    cursor: pointer;
+  }
+
+  .header-left {
+    i:hover {
+      color: rgb(0, 255, 229);
+      animation: rotateFan 0.5s ease-in-out infinite;
+    }
+    @include setSize(100%, 50%);
+    @include setCenterY;
+  }
+  .header-right {
+    @include setSize(100%, 50%);
+    @include setCenterY;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}
