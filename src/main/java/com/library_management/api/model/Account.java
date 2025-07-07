@@ -22,6 +22,12 @@ public class Account {
     String password;
     String status;
 
+    @Column(name = "is2FA", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    Boolean is2FA;
+
+    @Column(name = "secret_key", nullable = true, columnDefinition = "VARCHAR(255) DEFAULT NULL")
+    String secretKey;
+
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     Customer customer;

@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/customers")
@@ -26,7 +27,7 @@ public class CustomerController extends BaseController {
     InterfaceAuthService<AuthReq, AuthRes, CustomerReq, CustomerRes> sv;
 
     @PostMapping("/auth/login")
-    public ResponseEntity<ApiResponse<AuthRes>> login(@Valid @RequestBody AuthReq data) {
+    public ResponseEntity<ApiResponse<AuthRes>> login(@Valid @RequestBody AuthReq data) throws ParseException, JOSEException {
         return returnResponseJson(SuccessCode.Authentication_is_ok, sv.login(data));
     }
 
@@ -47,11 +48,15 @@ public class CustomerController extends BaseController {
 
     @GetMapping("/auth/profile")
     public ResponseEntity<ApiResponse<CustomerRes>> getProfile(Authentication auth) throws ParseException, JOSEException {
-
         return returnResponseJson(SuccessCode.Authentication_is_ok, sv.getProfile(auth));
     }
 
     public ResponseEntity<ApiResponse<Void>> logout(String token) {
         return null;
+    }
+
+    @PostMapping("/auth/enable-2fa")
+    public ResponseEntity<ApiResponse<String>> enable2FA(Authentication auth ) throws ParseException, JOSEException {
+        return returnResponseJson(SuccessCode.CREATE_SUCCESS, sv.enable2FA(auth));
     }
 }

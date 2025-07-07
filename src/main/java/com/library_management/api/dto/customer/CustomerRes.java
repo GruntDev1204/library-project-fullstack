@@ -19,4 +19,5 @@ public class CustomerRes {
     String phoneNumber;
     String email;
     String role;
+    Boolean is2FA;
 }

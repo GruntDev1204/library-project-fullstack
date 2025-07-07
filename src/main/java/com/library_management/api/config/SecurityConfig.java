@@ -27,7 +27,11 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> {
             request
-                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("customers/auth/login").permitAll()
+                    .requestMatchers("customers/auth/register").permitAll()
+                    .requestMatchers("customers/auth/profile").authenticated()
+                    .requestMatchers("customers/auth/enable-2fa").authenticated()
+                    .requestMatchers("customers/update-profile").authenticated()
                     .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/books/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/books/**").hasAuthority("admin")
@@ -40,9 +44,6 @@ public class SecurityConfig implements WebMvcConfigurer {
         });
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
-
-        httpSecurity.oauth2ResourceServer(oauth2 ->
-                oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())));
 
         httpSecurity.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())

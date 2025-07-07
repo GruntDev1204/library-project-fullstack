@@ -1,0 +1,1 @@
+ALTER TABLE accounts ADD COLUMN is2FA BIT Default 0 ;

@@ -1,0 +1,1 @@
+ALTER TABLE accounts ADD COLUMN secret_key VARCHAR(255) Default NULL;

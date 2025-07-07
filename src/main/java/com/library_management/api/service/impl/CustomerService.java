@@ -1,12 +1,15 @@
 package com.library_management.api.service.impl;
 
 import com.library_management.api.dto.authentication.*;
+import com.library_management.api.helper.auth_process.AESEncoder;
+import com.library_management.api.helper.auth_process.TOTPHelper;
 import com.library_management.api.helper.auth_process.TokenManagement;
 import com.library_management.api.helper.code_status.ErrorCode;
 import com.library_management.api.exception.ApiException;
 import com.library_management.api.dto.authentication.AuthRes;
 import com.library_management.api.dto.customer.CustomerReq;
 import com.library_management.api.dto.customer.CustomerRes;
+import com.library_management.api.mapper.ICustomerMapper;
 import com.library_management.api.model.Account;
 import com.library_management.api.model.Customer;
 import com.library_management.api.repository.IAccountRepository;
@@ -31,6 +34,7 @@ import java.text.ParseException;
 public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, CustomerReq, CustomerRes> {
     ICustomerRepository infoRepo;
     IAccountRepository accountRepo;
+    ICustomerMapper mapper;
     TokenManagement tk;
 
     private String encodePassword(String password) {
@@ -64,34 +68,30 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
         }
     }
 
-    @NotNull
-    private CustomerRes getCustomerRes(Account user) {
-        CustomerRes res = new CustomerRes();
-        res.setStatus(user.getStatus());
-        res.setUserName(user.getUserName());
-        res.setFullName(user.getCustomer().getFullName());
-        res.setPhoneNumber(user.getCustomer().getPhoneNumber());
-        res.setEmail(user.getCustomer().getEmail());
-        return res;
-    }
-
     @Override
     public CustomerRes register(CustomerReq data) {
         this.checkExist(data);
         Customer customer = this.createCustomer(data);
         Account account = this.createAccount(data, customer);
-        return this.getCustomerRes(account);
+        return mapper.entityToRes(account);
     }
 
     @Override
-    public AuthRes login(AuthReq data) {
+    public AuthRes login(AuthReq data) throws ParseException, JOSEException {
         Account user = accountRepo.findByUserName(data.getUserName());
         if (user == null) {
             throw new ApiException(ErrorCode.User_Not_Found);
         }
+
         if (!new BCryptPasswordEncoder(10).matches(data.getPassword(), user.getPassword())) {
             throw new ApiException(ErrorCode.Wrong_Password);
         }
+
+        if(user.getIs2FA()) {
+            if(data.getOtp() != null)  TOTPHelper.verifyTOTP(AESEncoder.decode(user.getSecretKey()), data.getOtp());
+            else throw new ApiException(ErrorCode.OTP_REQUIRED);
+        }
+
         String token = tk.createToken(user, "customer");
         return new AuthRes(token);
     }
@@ -114,7 +114,7 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
             throw new ApiException(ErrorCode.User_Not_Found);
         }
 
-        CustomerRes response = this.getCustomerRes(user);
+        CustomerRes response = mapper.entityToRes(user);
         response.setRole(role);
         return response;
     }
@@ -131,5 +131,25 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
         res.setFullName(data.getFullName());
         res.setFullName(data.getFullName());
         return res;
+    }
+
+    @Override
+    public String enable2FA(Authentication auth) throws ParseException, JOSEException {
+        Account user = accountRepo.findByUserName(auth.getName());
+        if (user == null) {
+            throw new ApiException(ErrorCode.User_Not_Found);
+        }
+
+        if (user.getIs2FA()) {
+            return "2FA is already enabled!";
+        }else {
+            user.setIs2FA(true);
+
+            String originKey = TOTPHelper.generateSecretKey();
+            user.setSecretKey(AESEncoder.encode(originKey));
+            accountRepo.save(user);
+
+            return TOTPHelper.generateQr(originKey, user.getUserName());
+        }
     }
 }
