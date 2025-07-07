@@ -26,7 +26,7 @@ public enum ErrorCode{
     User_Not_Found(42206, "USER NOT FOUND", HttpStatus.UNPROCESSABLE_ENTITY),
     Wrong_Password(42207, "PASSWORD IS NOT CORRECT", HttpStatus.UNPROCESSABLE_ENTITY),
     Authentication_is_not_ok(40001, "Authentication is not ok ,token is not valid, cook đi cook đi!", HttpStatus.UNAUTHORIZED),
-    OTP_REQUIRED(40003, "OTP is required", HttpStatus.FORBIDDEN),
+    OTP_REQUIRED(40003, "OTP is required! Please check your Authentication App!", HttpStatus.FORBIDDEN),
     ROLE_NOT_AVAILABLE(40304, "Role Not Found ,(must be admin or  customer)" , HttpStatus.FORBIDDEN);
 
     Integer code;

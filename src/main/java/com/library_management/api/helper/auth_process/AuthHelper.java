@@ -6,27 +6,39 @@ import com.library_management.api.model.Account;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
+import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-@Component
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TokenManagement {
+public class AuthHelper {
     @Value("${jwt.signerKey}")
     private String SIGNER_KEY;
 
+    private static String KEY;
+    private static final Integer defaultSalt = 10;
+
+    @PostConstruct
+    public void init() {
+        KEY = SIGNER_KEY;
+    }
+
+    private static Integer getSalt(Integer optionSalt) {
+        return (optionSalt != null) ? optionSalt : defaultSalt;
+    }
+
     @NotNull
-    public String createToken(Account user, String role) {
+    public static String createToken(Account user, String role) {
         try {
             JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.HS512)
                     .type(JOSEObjectType.JWT)
@@ -45,7 +57,7 @@ public class TokenManagement {
                     .claim("role", role)
                     .build();
             JWSObject jwsObject = new JWSObject(header, new Payload(claims.toJSONObject()));
-            jwsObject.sign(new MACSigner(SIGNER_KEY.getBytes()));
+            jwsObject.sign(new MACSigner(KEY.getBytes()));
 
             return jwsObject.serialize();
         } catch (JOSEException e) {
@@ -54,9 +66,19 @@ public class TokenManagement {
     }
 
     @NotNull
-    public String getRole(Authentication auth) {
+    public static String getRole(Authentication auth) {
        String role =  auth.getAuthorities().iterator().next().getAuthority();
        if("admin".equalsIgnoreCase(role) || "customer".equalsIgnoreCase(role)) return role;
        else throw new ApiException(ErrorCode.ROLE_NOT_AVAILABLE);
+    }
+
+    public static String encodePassword(String password , Integer salt) {
+        return new BCryptPasswordEncoder(getSalt(salt)).encode(password);
+    }
+
+    public static void verifyPassword(String inputPassword , String basePassword , Integer salt) {
+        if(!new BCryptPasswordEncoder(getSalt(salt)).matches(inputPassword , basePassword)) {
+            throw new ApiException(ErrorCode.Wrong_Password);
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.library_management.api.service.impl;
 import com.library_management.api.dto.authentication.*;
 import com.library_management.api.helper.auth_process.AESEncoder;
 import com.library_management.api.helper.auth_process.TOTPHelper;
-import com.library_management.api.helper.auth_process.TokenManagement;
+import com.library_management.api.helper.auth_process.AuthHelper;
 import com.library_management.api.helper.code_status.ErrorCode;
 import com.library_management.api.exception.ApiException;
 import com.library_management.api.dto.authentication.AuthRes;
@@ -15,17 +15,13 @@ import com.library_management.api.model.Customer;
 import com.library_management.api.repository.IAccountRepository;
 import com.library_management.api.repository.ICustomerRepository;
 import com.library_management.api.service.InterfaceAuthService;
-import com.nimbusds.jose.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 
 @Service
 @AllArgsConstructor
@@ -35,11 +31,6 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
     ICustomerRepository infoRepo;
     IAccountRepository accountRepo;
     ICustomerMapper mapper;
-    TokenManagement tk;
-
-    private String encodePassword(String password) {
-        return new BCryptPasswordEncoder(10).encode(password);
-    }
 
     private Customer createCustomer(CustomerReq data) {
         Customer c = new Customer();
@@ -52,52 +43,62 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
     private Account createAccount(CustomerReq data, Customer customer) {
         Account a = new Account();
         a.setUserName(data.getUserName());
-        a.setPassword(this.encodePassword(data.getPassword()));
+        a.setPassword(AuthHelper.encodePassword(data.getPassword() , null));
         a.setStatus("ACTIVE");
         a.setCustomer(customer);
         return accountRepo.save(a);
     }
 
-    private void checkExist(CustomerReq data) {
-        Account exist = accountRepo.findByUserName(data.getUserName());
-        Customer existC = infoRepo.findByEmail(data.getEmail());
-        if (exist != null) {
-            throw new ApiException(ErrorCode.Exist_UserName);
-        } else if (existC != null) {
-            throw new ApiException(ErrorCode.Exist_Email);
+    private Account checkExist(CustomerReq data , Authentication auth , AuthReq authReq , String option) {
+        String username = auth != null ? auth.getName()
+                : (authReq != null ? authReq.getUserName()
+                : data.getUserName());
+
+        Account account = accountRepo.findByUserName(username);
+        Customer customer = data != null ? infoRepo.findByEmail(data.getEmail()) : null;
+
+        switch (option) {
+           case "unique" -> {
+               if (account != null) throw new ApiException(ErrorCode.Exist_UserName);
+               if (customer != null) throw new ApiException(ErrorCode.Exist_Email);
+               return null;
+           }
+           case "not_exist" -> {
+               if (account == null) {
+                   throw new ApiException(ErrorCode.User_Not_Found);
+               }
+               return account;
+           }
+            default -> throw new IllegalArgumentException("Invalid option");
         }
     }
 
     @Override
     public CustomerRes register(CustomerReq data) {
-        this.checkExist(data);
+        this.checkExist(data , null, null, "unique");
         Customer customer = this.createCustomer(data);
         Account account = this.createAccount(data, customer);
         return mapper.entityToRes(account);
     }
 
     @Override
-    public AuthRes login(AuthReq data) throws ParseException, JOSEException {
-        Account user = accountRepo.findByUserName(data.getUserName());
-        if (user == null) {
-            throw new ApiException(ErrorCode.User_Not_Found);
-        }
+    public AuthRes login(AuthReq data) {
+        Account user = this.checkExist( null , null , data, "not_exist");
+        assert user != null;
 
-        if (!new BCryptPasswordEncoder(10).matches(data.getPassword(), user.getPassword())) {
-            throw new ApiException(ErrorCode.Wrong_Password);
-        }
+        AuthHelper.verifyPassword(data.getPassword() , user.getPassword() , null);
 
         if(user.getIs2FA()) {
             if(data.getOtp() != null)  TOTPHelper.verifyTOTP(AESEncoder.decode(user.getSecretKey()), data.getOtp());
             else throw new ApiException(ErrorCode.OTP_REQUIRED);
         }
 
-        String token = tk.createToken(user, "customer");
+        String token = AuthHelper.createToken(user, "customer");
         return new AuthRes(token);
     }
 
     @Override
-    public Void logout(String token) throws JOSEException, ParseException {
+    public Void logout(String token) {
         boolean isValid = false;
         if (!isValid) {
             throw new ApiException(ErrorCode.Authentication_is_not_ok);
@@ -107,12 +108,8 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
 
     @Override
     public CustomerRes getProfile(Authentication auth) {
-        Account user = accountRepo.findByUserName(auth.getName());
-        String role = tk.getRole(auth);
-
-        if (user == null) {
-            throw new ApiException(ErrorCode.User_Not_Found);
-        }
+        Account user = this.checkExist(null , auth , null,"not_exist");
+        String role = AuthHelper.getRole(auth);
 
         CustomerRes response = mapper.entityToRes(user);
         response.setRole(role);
@@ -120,7 +117,7 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
     }
 
     @Override
-    public CustomerRes updateProfile(Authentication auth , CustomerReq data) throws ParseException, JOSEException {
+    public CustomerRes updateProfile(Authentication auth , CustomerReq data) {
         CustomerRes res = this.getProfile(auth);
         Customer dataUpdate = infoRepo.findByEmail(res.getEmail());
 
@@ -134,12 +131,9 @@ public class CustomerService implements InterfaceAuthService<AuthReq, AuthRes, C
     }
 
     @Override
-    public String enable2FA(Authentication auth) throws ParseException, JOSEException {
-        Account user = accountRepo.findByUserName(auth.getName());
-        if (user == null) {
-            throw new ApiException(ErrorCode.User_Not_Found);
-        }
-
+    public String enable2FA(Authentication auth){
+        Account user = this.checkExist(null , auth , null,"not_exist");
+        assert user != null;
         if (user.getIs2FA()) {
             return "2FA is already enabled!";
         }else {
